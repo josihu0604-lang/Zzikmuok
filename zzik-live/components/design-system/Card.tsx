@@ -6,6 +6,7 @@ import { MapPin, Clock, Coins, Eye, Heart } from 'lucide-react';
 import { formatDistanceToNow } from 'date-fns';
 import { ko } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
+import { OptimizedImage, Avatar } from '@/components/OptimizedImage';
 
 /**
  * Card Components - ZZIK LIVE Design System v1.0
@@ -81,16 +82,18 @@ export const MissionCard: React.FC<MissionCardProps> = ({ mission, onTap }) => {
     >
       {/* Image Section */}
       <div className="relative h-48 overflow-hidden">
-        <img
+        <OptimizedImage
           src={mission.imageUrl}
           alt={mission.name}
-          className="w-full h-full object-cover"
+          fill
+          quality={75}
+          className="object-cover"
         />
 
         {/* Difficulty Badge */}
         <div
           className={cn(
-            'absolute top-3 right-3 px-3 py-1 rounded-full',
+            'absolute top-3 right-3 px-3 py-1 rounded-full z-10',
             'text-xs font-semibold backdrop-blur-sm',
             difficultyColors[mission.difficulty]
           )}
@@ -99,7 +102,7 @@ export const MissionCard: React.FC<MissionCardProps> = ({ mission, onTap }) => {
         </div>
 
         {/* Category Badge */}
-        <div className="absolute bottom-3 left-3">
+        <div className="absolute bottom-3 left-3 z-10">
           <span
             className={cn(
               'px-3 py-1 rounded-full text-xs font-medium',
@@ -199,31 +202,34 @@ export const PhotoCard: React.FC<PhotoCardProps> = ({ photo, onLike }) => {
 
   return (
     <motion.div
-      className="relative rounded-xl overflow-hidden cursor-pointer"
+      className="relative rounded-xl overflow-hidden cursor-pointer h-48"
       whileHover={{ scale: 1.02 }}
       whileTap={{ scale: 0.98 }}
       layout
     >
-      <img
+      <OptimizedImage
         src={photo.imageUrl}
         alt="Photo"
-        className="w-full h-48 object-cover"
+        fill
+        quality={80}
+        className="object-cover"
       />
 
       {/* Gradient Overlay */}
       <div
         className={cn(
-          'absolute inset-0 bg-gradient-to-t',
+          'absolute inset-0 bg-gradient-to-t z-10',
           'from-black/60 via-black/20 to-transparent',
           'flex flex-col justify-end p-4'
         )}
       >
         {/* Creator Info */}
         <div className="flex items-center gap-2 mb-3">
-          <img
+          <Avatar
             src={photo.creator.avatarUrl}
             alt={photo.creator.name}
-            className="w-8 h-8 rounded-full border-2 border-white"
+            size="sm"
+            className="border-2 border-white"
           />
           <span className="text-white text-sm font-medium">
             {photo.creator.name}
