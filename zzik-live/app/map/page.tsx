@@ -1,10 +1,17 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, Suspense, lazy } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, SlidersHorizontal, List, Navigation as NavigationIcon, MapPin } from 'lucide-react';
-import { MapDrawer, PhotoCard } from '@/components/design-system';
+import { PhotoCard } from '@/components/design-system';
 import { Button } from '@/components/design-system';
+
+// Dynamic import for MapDrawer (heavy component)
+const MapDrawer = lazy(() => 
+  import('@/components/design-system').then(module => ({ 
+    default: module.MapDrawer 
+  }))
+);
 
 /**
  * Map Screen - ZZIK LIVE
@@ -343,28 +350,34 @@ export default function MapPage() {
         </motion.div>
       </div>
 
-      {/* Bottom Drawer using MapDrawer component */}
-      <MapDrawer
-        open={drawerOpen}
-        onClose={() => setDrawerOpen(false)}
-        location={
-          selectedLocation
-            ? {
-                name: selectedLocation.name,
-                address: selectedLocation.address,
-                category: selectedLocation.category,
-                distance: selectedLocation.distance,
-              }
-            : undefined
-        }
-        photos={selectedLocation?.photos.map((p) => ({
-          id: p.id,
-          imageUrl: p.imageUrl,
-          likes: p.likes,
-        }))}
-        mission={selectedLocation?.mission}
-        onViewMission={handleStartMission}
-      />
+      {/* Bottom Drawer using MapDrawer component with lazy loading */}
+      <Suspense fallback={
+        <div className="absolute bottom-0 left-0 right-0 h-20 bg-white rounded-t-3xl shadow-xl flex items-center justify-center">
+          <div className="animate-pulse text-gray-400">로딩 중...</div>
+        </div>
+      }>
+        <MapDrawer
+          open={drawerOpen}
+          onClose={() => setDrawerOpen(false)}
+          location={
+            selectedLocation
+              ? {
+                  name: selectedLocation.name,
+                  address: selectedLocation.address,
+                  category: selectedLocation.category,
+                  distance: selectedLocation.distance,
+                }
+              : undefined
+          }
+          photos={selectedLocation?.photos.map((p) => ({
+            id: p.id,
+            imageUrl: p.imageUrl,
+            likes: p.likes,
+          }))}
+          mission={selectedLocation?.mission}
+          onViewMission={handleStartMission}
+        />
+      </Suspense>
     </div>
   );
 }

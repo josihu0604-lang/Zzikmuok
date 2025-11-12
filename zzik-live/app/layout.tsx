@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { ServiceWorkerProvider } from "@/components/ServiceWorkerProvider";
+import { WebVitalsProvider } from "@/components/WebVitalsProvider";
 
 // Load Inter font (fallback for Pretendard which is loaded via CSS)
 const inter = Inter({
@@ -93,6 +94,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
+        <WebVitalsProvider />
         <ServiceWorkerProvider>{children}</ServiceWorkerProvider>
       </body>
     </html>
