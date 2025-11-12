@@ -7,7 +7,8 @@ test.describe('Salient Template', () => {
 
   test('should display hero section', async ({ page }) => {
     await expect(page.getByText(/카페 가서 사진만 찍으면/i)).toBeVisible();
-    await expect(page.getByText(/15,000원/i)).toBeVisible();
+    // Use more specific selector to target hero section only
+    await expect(page.locator('section').first().getByText(/15,000원/)).toBeVisible();
   });
 
   test('should have working CTA button', async ({ page }) => {
@@ -26,7 +27,7 @@ test.describe('Salient Template', () => {
     // Scroll to testimonials section
     await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight / 2));
     
-    // Check for testimonials
-    await expect(page.locator('[class*="testimonial"]').first()).toBeVisible({ timeout: 5000 });
+    // Check for testimonials section using more reliable selector
+    await expect(page.locator('section').filter({ hasText: '실제' }).first()).toBeVisible({ timeout: 5000 });
   });
 });
