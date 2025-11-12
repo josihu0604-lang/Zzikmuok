@@ -1,7 +1,7 @@
 # 🚀 ZZIK LIVE - GPS Triple Verification Full-Stack Platform
 
-[![Next.js](https://img.shields.io/badge/Next.js-15.0.0-black?logo=next.js)](https://nextjs.org/)
-[![TypeScript](https://img.shields.io/badge/TypeScript-5.4.5-blue?logo=typescript)](https://www.typescriptlang.org/)
+[![Next.js](https://img.shields.io/badge/Next.js-16.0.1-black?logo=next.js)](https://nextjs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0+-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![Expo](https://img.shields.io/badge/Expo-Web-000020?logo=expo)](https://expo.dev/)
 [![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-3ECF8E?logo=supabase)](https://supabase.com/)
 [![License](https://img.shields.io/badge/license-Proprietary-red)]()
@@ -89,8 +89,9 @@ ZZIK LIVE는 GPS 기반 위치 검증, QR 코드 인증, 영수증 검증을 통
 ## 🛠️ Tech Stack
 
 ### Frontend
-- **Next.js 15.0.0** - React 서버 컴포넌트, App Router
-- **TypeScript 5.4.5** - Type-safe 개발
+- **Next.js 16.0.1** - React 19 서버 컴포넌트, App Router
+- **TypeScript 5.0+** - Type-safe 개발
+- **React 19.2.0** - 최신 React 기능
 - **Expo** - 크로스 플랫폼 모바일
 
 ### Backend
