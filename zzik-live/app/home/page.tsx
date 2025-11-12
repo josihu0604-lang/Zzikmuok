@@ -56,7 +56,7 @@ const mockMissions: Mission[] = [
     category: 'cafe',
     reward: 15000,
     distance: '0.3km',
-    imageUrl: '/placeholder-cafe.jpg',
+    imageUrl: '/images/placeholder-cafe.svg',
     difficulty: 'easy',
     expiresAt: new Date(Date.now() + 86400000 * 2),
     trending: true,
@@ -67,7 +67,7 @@ const mockMissions: Mission[] = [
     category: 'restaurant',
     reward: 20000,
     distance: '0.8km',
-    imageUrl: '/placeholder-restaurant.jpg',
+    imageUrl: '/images/placeholder-restaurant.svg',
     difficulty: 'medium',
     expiresAt: new Date(Date.now() + 86400000 * 3),
     trending: true,
@@ -78,7 +78,7 @@ const mockMissions: Mission[] = [
     category: 'dessert',
     reward: 18000,
     distance: '1.2km',
-    imageUrl: '/placeholder-dessert.jpg',
+    imageUrl: '/images/placeholder-dessert.svg',
     difficulty: 'easy',
     expiresAt: new Date(Date.now() + 86400000),
     trending: true,
@@ -89,7 +89,7 @@ const mockMissions: Mission[] = [
     category: 'restaurant',
     reward: 25000,
     distance: '1.5km',
-    imageUrl: '/placeholder-brunch.jpg',
+    imageUrl: '/images/placeholder-cafe.svg',
     difficulty: 'hard',
     expiresAt: new Date(Date.now() + 86400000 * 4),
   },
@@ -99,7 +99,7 @@ const mockMissions: Mission[] = [
     category: 'bakery',
     reward: 12000,
     distance: '0.5km',
-    imageUrl: '/placeholder-bakery.jpg',
+    imageUrl: '/images/placeholder-dessert.svg',
     difficulty: 'easy',
     expiresAt: new Date(Date.now() + 86400000 * 2),
   },
@@ -109,7 +109,7 @@ const mockMissions: Mission[] = [
     category: 'restaurant',
     reward: 30000,
     distance: '2.0km',
-    imageUrl: '/placeholder-french.jpg',
+    imageUrl: '/images/placeholder-french.svg',
     difficulty: 'hard',
     expiresAt: new Date(Date.now() + 86400000 * 5),
     trending: true,
@@ -347,3 +347,4 @@ export default function HomePage() {
     </PageWithNav>
   );
 }
+

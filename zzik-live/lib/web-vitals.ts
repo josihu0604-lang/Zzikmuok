@@ -3,14 +3,13 @@
  * 
  * Tracks and reports Core Web Vitals metrics:
  * - LCP (Largest Contentful Paint)
- * - FID (First Input Delay)
+ * - INP (Interaction to Next Paint) - replaces FID
  * - CLS (Cumulative Layout Shift)
  * - FCP (First Contentful Paint)
  * - TTFB (Time to First Byte)
- * - INP (Interaction to Next Paint)
  */
 
-import { onCLS, onFCP, onFID, onLCP, onTTFB, onINP, Metric } from 'web-vitals';
+import { onCLS, onFCP, onLCP, onTTFB, onINP, Metric } from 'web-vitals';
 
 export interface WebVitalsMetric {
   id: string;
@@ -29,10 +28,6 @@ const THRESHOLDS = {
   LCP: {
     good: 2500, // 2.5s
     poor: 4000, // 4s
-  },
-  FID: {
-    good: 100, // 100ms
-    poor: 300, // 300ms
   },
   CLS: {
     good: 0.1,
@@ -138,8 +133,8 @@ export function initWebVitals() {
   if (typeof window === 'undefined') return;
 
   // Monitor all Core Web Vitals
+  // Note: FID is deprecated in web-vitals v4+, replaced by INP
   onCLS(reportWebVital);
-  onFID(reportWebVital);
   onLCP(reportWebVital);
   onFCP(reportWebVital);
   onTTFB(reportWebVital);

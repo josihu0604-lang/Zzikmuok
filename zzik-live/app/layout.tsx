@@ -15,6 +15,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3005'),
   title: "ZZIK LIVE - 카페 가서 사진만 찍으면 월 15만원",
   description: "일상 속 카페, 맛집 방문이 수익이 되는 플랫폼. 전국 10,000개+ 매장에서 미션을 기다리고 있어요.",
   applicationName: "ZZIK LIVE",

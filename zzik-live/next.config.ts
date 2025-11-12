@@ -14,62 +14,16 @@ const nextConfig: NextConfig = {
 
   /* Performance Optimizations */
   compress: true,
-  swcMinify: true,
   poweredByHeader: false,
   reactStrictMode: true,
 
-  /* Webpack Bundle Analyzer (for development) */
-  webpack: (config, { isServer, dev }) => {
-    // Optimize bundle size in production
-    if (!dev && !isServer) {
-      config.optimization = {
-        ...config.optimization,
-        moduleIds: 'deterministic',
-        runtimeChunk: 'single',
-        splitChunks: {
-          chunks: 'all',
-          cacheGroups: {
-            // Vendor chunks for commonly used libraries
-            vendor: {
-              test: /[\\/]node_modules[\\/]/,
-              name(module: any) {
-                const packageName = module.context.match(
-                  /[\\/]node_modules[\\/](.*?)([\\/]|$)/
-                )?.[1];
-                return `vendor.${packageName?.replace('@', '')}`;
-              },
-              priority: 10,
-            },
-            // Common chunks across pages
-            common: {
-              minChunks: 2,
-              priority: 5,
-              reuseExistingChunk: true,
-            },
-            // Design system components
-            designSystem: {
-              test: /[\\/]components[\\/]design-system[\\/]/,
-              name: 'design-system',
-              priority: 15,
-            },
-            // Framer Motion animations
-            animations: {
-              test: /[\\/]node_modules[\\/](framer-motion)[\\/]/,
-              name: 'animations',
-              priority: 20,
-            },
-          },
-        },
-      };
-    }
-
-    return config;
+  /* Turbopack Configuration (Next.js 16+) */
+  turbopack: {
+    // Empty config to silence webpack warning
   },
 
   /* Experimental Features */
   experimental: {
-    // Enable optimistic client cache
-    optimisticClientCache: true,
     // Enable server actions
     serverActions: {
       bodySizeLimit: '2mb',

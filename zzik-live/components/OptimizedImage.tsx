@@ -168,6 +168,7 @@ export const OptimizedImage: React.FC<OptimizedImageProps> = ({
         loading={priority ? undefined : 'lazy'}
         onLoad={handleLoad}
         onError={handleError}
+        unoptimized={src.endsWith('.svg')}
         className={cn(
           'transition-opacity duration-300',
           isLoading ? 'opacity-0' : 'opacity-100',
