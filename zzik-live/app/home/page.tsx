@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { MapPin, Bell, Search, ChevronDown, TrendingUp, Navigation as NavigationIcon } from 'lucide-react';
 import { MissionCard } from '@/components/design-system';
 import { staggerContainerVariants, staggerItemVariants } from '@/lib/animations';
+import { PageWithNav } from '@/components/NavigationBar';
 
 /**
  * Home Screen - ZZIK LIVE
@@ -132,7 +133,8 @@ export default function HomePage() {
   const trendingMissions = mockMissions.filter((m) => m.trending);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <PageWithNav badges={{ missions: 3 }}>
+      <div className="min-h-screen bg-gray-50">
       {/* Header */}
       <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
         <div className="flex items-center justify-between px-6 py-4">
@@ -284,32 +286,7 @@ export default function HomePage() {
           )}
         </section>
       </main>
-
-      {/* Bottom Navigation - Placeholder */}
-      <nav className="fixed bottom-0 inset-x-0 z-50 bg-white border-t border-gray-200">
-        <div className="flex items-center justify-around px-6 py-3">
-          <button className="flex flex-col items-center gap-1 text-primary-600">
-            <MapPin className="w-6 h-6" strokeWidth={2.5} />
-            <span className="text-xs font-medium">홈</span>
-          </button>
-          <button className="flex flex-col items-center gap-1 text-gray-400">
-            <MapPin className="w-6 h-6" />
-            <span className="text-xs">지도</span>
-          </button>
-          <button className="flex flex-col items-center gap-1 text-gray-400">
-            <MapPin className="w-6 h-6" />
-            <span className="text-xs">미션</span>
-          </button>
-          <button className="flex flex-col items-center gap-1 text-gray-400">
-            <MapPin className="w-6 h-6" />
-            <span className="text-xs">보상</span>
-          </button>
-          <button className="flex flex-col items-center gap-1 text-gray-400">
-            <MapPin className="w-6 h-6" />
-            <span className="text-xs">프로필</span>
-          </button>
-        </div>
-      </nav>
-    </div>
+      </div>
+    </PageWithNav>
   );
 }

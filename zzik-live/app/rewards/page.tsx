@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { Coins, ArrowUpRight, ArrowDownLeft, TrendingUp, Wallet } from 'lucide-react';
 import { Button, Badge } from '@/components/design-system';
 import { staggerContainerVariants, staggerItemVariants } from '@/lib/animations';
+import { PageWithNav } from '@/components/NavigationBar';
 
 /**
  * Rewards Screen - ZZIK LIVE
@@ -73,7 +74,8 @@ export default function RewardsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-24">
+    <PageWithNav>
+      <div className="min-h-screen bg-gray-50 pb-24">
       {/* Header */}
       <header className="bg-gradient-to-br from-primary-500 to-purple-600 text-white">
         <div className="px-6 py-8">
@@ -223,6 +225,7 @@ export default function RewardsPage() {
           </div>
         )}
       </main>
-    </div>
+      </div>
+    </PageWithNav>
   );
 }

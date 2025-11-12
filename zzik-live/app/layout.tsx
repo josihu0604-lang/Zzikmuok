@@ -3,6 +3,8 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { ServiceWorkerProvider } from "@/components/ServiceWorkerProvider";
 import { WebVitalsProvider } from "@/components/WebVitalsProvider";
+import { ToastProvider } from "@/components/Toast";
+import { ErrorBoundary } from "@/components/ErrorBoundary";
 
 // Load Inter font (fallback for Pretendard which is loaded via CSS)
 const inter = Inter({
@@ -95,7 +97,11 @@ export default function RootLayout({
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
         <WebVitalsProvider />
-        <ServiceWorkerProvider>{children}</ServiceWorkerProvider>
+        <ErrorBoundary>
+          <ToastProvider>
+            <ServiceWorkerProvider>{children}</ServiceWorkerProvider>
+          </ToastProvider>
+        </ErrorBoundary>
       </body>
     </html>
   );

@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { CheckCircle2, Clock, TrendingUp, Calendar } from 'lucide-react';
 import { MissionCard, StatusBadge } from '@/components/design-system';
 import { staggerContainerVariants, staggerItemVariants } from '@/lib/animations';
+import { PageWithNav } from '@/components/NavigationBar';
 
 /**
  * Missions Screen - ZZIK LIVE
@@ -84,7 +85,8 @@ export default function MissionsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-24">
+    <PageWithNav badges={{ missions: ongoingMissions.length }}>
+      <div className="min-h-screen bg-gray-50 pb-24">
       {/* Header */}
       <header className="bg-white border-b border-gray-200">
         <div className="px-6 py-4">
@@ -229,6 +231,7 @@ export default function MissionsPage() {
           </div>
         )}
       </main>
-    </div>
+      </div>
+    </PageWithNav>
   );
 }

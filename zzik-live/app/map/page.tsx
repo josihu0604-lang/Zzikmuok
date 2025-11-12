@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import { ArrowLeft, SlidersHorizontal, List, Navigation as NavigationIcon, MapPin } from 'lucide-react';
 import { PhotoCard } from '@/components/design-system';
 import { Button } from '@/components/design-system';
+import { PageWithNav } from '@/components/NavigationBar';
 
 // Dynamic import for MapDrawer (heavy component)
 const MapDrawer = lazy(() => 
@@ -172,7 +173,8 @@ export default function MapPage() {
   };
 
   return (
-    <div className="relative h-screen overflow-hidden">
+    <PageWithNav>
+      <div className="relative h-screen overflow-hidden">
       {/* Floating Header */}
       <header className="absolute top-0 inset-x-0 z-50 px-6 py-4">
         <div className="flex items-center justify-between">
@@ -378,6 +380,7 @@ export default function MapPage() {
           onViewMission={handleStartMission}
         />
       </Suspense>
-    </div>
+      </div>
+    </PageWithNav>
   );
 }

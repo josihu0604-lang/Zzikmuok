@@ -15,6 +15,7 @@ import {
   Calendar,
 } from 'lucide-react';
 import { Button, Badge } from '@/components/design-system';
+import { PageWithNav } from '@/components/NavigationBar';
 
 /**
  * Profile Screen - ZZIK LIVE
@@ -59,7 +60,8 @@ export default function ProfilePage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-24">
+    <PageWithNav>
+      <div className="min-h-screen bg-gray-50 pb-24">
       {/* Header */}
       <header className="bg-gradient-to-br from-primary-500 to-purple-600 text-white pt-12 pb-16 px-6">
         <div className="flex items-start justify-between mb-6">
@@ -183,6 +185,7 @@ export default function ProfilePage() {
           <p className="text-sm text-gray-400">ZZIK LIVE v1.0.0</p>
         </div>
       </main>
-    </div>
+      </div>
+    </PageWithNav>
   );
 }
