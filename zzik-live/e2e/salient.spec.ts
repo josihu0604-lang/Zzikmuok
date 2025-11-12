@@ -7,8 +7,8 @@ test.describe('Salient Template', () => {
 
   test('should display hero section', async ({ page }) => {
     await expect(page.getByText(/카페 가서 사진만 찍으면/i)).toBeVisible();
-    // Use more specific selector to target hero section only
-    await expect(page.locator('section').first().getByText(/15,000원/)).toBeVisible();
+    // Use heading-specific selector to avoid matching calculator stats
+    await expect(page.getByRole('heading', { level: 1 }).filter({ hasText: '15,000원' })).toBeVisible();
   });
 
   test('should have working CTA button', async ({ page }) => {
