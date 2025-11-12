@@ -196,16 +196,7 @@ body {
   transform: scale(1.05);
 }
 
-.btn-ghost {
-  background: transparent;
-  border: 2px solid var(--border);
-  color: var(--foreground);
-}
 
-.btn-ghost:hover {
-  background: var(--muted);
-  transform: scale(1.05);
-}
 
 /* Badge */
 .badge {
@@ -274,13 +265,7 @@ body {
   animation-delay: 0.5s;
 }
 
-.delay-1000 {
-  animation-delay: 1s;
-}
 
-.delay-2000 {
-  animation-delay: 2s;
-}
 
 /* ============================================
    Gradients & Effects
@@ -294,9 +279,7 @@ body {
   background: radial-gradient(circle at 50% 0%, rgba(168, 85, 247, 0.15) 0%, transparent 50%);
 }
 
-.bg-radial-pink {
-  background: radial-gradient(circle at 50% 0%, rgba(236, 72, 153, 0.15) 0%, transparent 50%);
-}
+
 
 /* Glass morphism */
 .glass {
@@ -306,12 +289,7 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-.glass-dark {
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
+
 
 /* Gradient text */
 .gradient-text {
@@ -329,62 +307,7 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Satoshi', 'Inter', system-ui, sans-serif;
 }
 
-.display-xl {
-  font-size: 3rem;
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -0.02em;
-}
 
-@media (min-width: 640px) {
-  .display-xl {
-    font-size: 3.75rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .display-xl {
-    font-size: 4.5rem;
-  }
-}
-
-.display-lg {
-  font-size: 2.25rem;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
-}
-
-@media (min-width: 640px) {
-  .display-lg {
-    font-size: 3rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .display-lg {
-    font-size: 3.75rem;
-  }
-}
-
-.display-md {
-  font-size: 1.875rem;
-  font-weight: 700;
-  line-height: 1.2;
-  letter-spacing: -0.01em;
-}
-
-@media (min-width: 640px) {
-  .display-md {
-    font-size: 2.25rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .display-md {
-    font-size: 3rem;
-  }
-}
 
 /* ============================================
    Accessibility
