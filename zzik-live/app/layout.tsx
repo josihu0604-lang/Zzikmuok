@@ -5,6 +5,7 @@ import { ServiceWorkerProvider } from "@/components/ServiceWorkerProvider";
 import { WebVitalsProvider } from "@/components/WebVitalsProvider";
 import { ToastProvider } from "@/components/Toast";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 // Load Inter font (fallback for Pretendard which is loaded via CSS)
 const inter = Inter({

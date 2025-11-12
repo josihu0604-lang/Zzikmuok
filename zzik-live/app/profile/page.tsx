@@ -16,6 +16,7 @@ import {
 } from 'lucide-react';
 import { Button, Badge } from '@/components/design-system';
 import { PageWithNav } from '@/components/NavigationBar';
+import { ThemeToggle } from '@/components/ThemeProvider';
 
 /**
  * Profile Screen - ZZIK LIVE
@@ -165,6 +166,26 @@ export default function ProfilePage() {
             </div>
           </div>
         ))}
+
+        {/* Theme Toggle */}
+        <div className="mb-6">
+          <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
+            테마
+          </h2>
+          <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-sm p-4">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="font-medium text-gray-900 dark:text-gray-100 mb-1">
+                  다크 모드
+                </h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  어두운 배경으로 눈의 피로를 줄여보세요
+                </p>
+              </div>
+              <ThemeToggle showLabel={false} />
+            </div>
+          </div>
+        </div>
 
         {/* Logout Button */}
         <div className="pt-4">

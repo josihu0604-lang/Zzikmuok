@@ -1,11 +1,12 @@
 'use client';
 
-import { useState, useMemo } from 'react';
-import { motion } from 'framer-motion';
-import { MapPin, Bell, Search, ChevronDown, TrendingUp, Navigation as NavigationIcon } from 'lucide-react';
+import { useState, useMemo, useCallback } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { MapPin, Bell, Search, ChevronDown, TrendingUp, Navigation as NavigationIcon, X } from 'lucide-react';
 import { MissionCard } from '@/components/design-system';
 import { staggerContainerVariants, staggerItemVariants } from '@/lib/animations';
 import { PageWithNav } from '@/components/NavigationBar';
+import { SearchBar, SearchFilter } from '@/components/SearchBar';
 
 /**
  * Home Screen - ZZIK LIVE
@@ -117,17 +118,46 @@ const mockMissions: Mission[] = [
 
 export default function HomePage() {
   const [selectedCategory, setSelectedCategory] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [showSearch, setShowSearch] = useState(false);
   const [location, setLocation] = useState({
     name: '성수동',
     nearbyCount: 12,
     radius: 2,
   });
 
-  // Filter missions by category
+  const searchFilters: SearchFilter[] = [
+    { id: 'nearby', label: '근처만', value: 'nearby', active: false },
+    { id: 'easy', label: '쉬운 미션', value: 'easy', active: false },
+    { id: 'high-reward', label: '고액 리워드', value: 'high-reward', active: false },
+  ];
+
+  // Handle search
+  const handleSearch = useCallback((query: string) => {
+    setSearchQuery(query);
+  }, []);
+
+  // Filter missions by category and search
   const filteredMissions = useMemo(() => {
-    if (selectedCategory === 'all') return mockMissions;
-    return mockMissions.filter((m) => m.category === selectedCategory);
-  }, [selectedCategory]);
+    let filtered = mockMissions;
+
+    // Category filter
+    if (selectedCategory !== 'all') {
+      filtered = filtered.filter((m) => m.category === selectedCategory);
+    }
+
+    // Search filter
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(
+        (m) =>
+          m.name.toLowerCase().includes(query) ||
+          m.category.toLowerCase().includes(query)
+      );
+    }
+
+    return filtered;
+  }, [selectedCategory, searchQuery]);
 
   // Separate trending missions
   const trendingMissions = mockMissions.filter((m) => m.trending);
@@ -154,12 +184,39 @@ export default function HomePage() {
             </motion.button>
             <motion.button
               whileTap={{ scale: 0.95 }}
+              onClick={() => setShowSearch(!showSearch)}
               className="p-2 rounded-full hover:bg-gray-100 transition-colors"
             >
-              <Search className="w-5 h-5 text-gray-700" />
+              {showSearch ? (
+                <X className="w-5 h-5 text-gray-700" />
+              ) : (
+                <Search className="w-5 h-5 text-gray-700" />
+              )}
             </motion.button>
           </div>
         </div>
+
+        {/* Search Bar */}
+        <AnimatePresence>
+          {showSearch && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: 'auto', opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="overflow-hidden"
+            >
+              <div className="px-6 pb-4">
+                <SearchBar
+                  onSearch={handleSearch}
+                  suggestions={['성수 카페', '홍대 맛집', '강남 미션']}
+                  recentSearches={['성수 카페', '강남역 미션']}
+                  filters={searchFilters}
+                />
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* Location Bar */}
         <div className="px-6 py-3 bg-primary-50 border-t border-primary-100">
