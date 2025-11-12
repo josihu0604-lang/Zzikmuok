@@ -5,7 +5,6 @@
 
 import { motion } from 'framer-motion';
 import { Star, Instagram, VerifiedIcon } from 'lucide-react';
-import Image from 'next/image';
 
 const testimonials = [
   {
@@ -169,7 +168,7 @@ export default function Testimonials() {
 
                 {/* 후기 내용 */}
                 <p className="text-sm text-gray-700 leading-relaxed mb-4">
-                  "{testimonial.content}"
+                  &ldquo;{testimonial.content}&rdquo;
                 </p>
 
                 {/* 수익 정보 */}

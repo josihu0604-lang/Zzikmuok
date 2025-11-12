@@ -16,7 +16,7 @@ const navigation = [
   { name: '고객 후기', href: '#testimonials' },
 ];
 
-export function PocketHeader({ user }: { user?: any }) {
+export function PocketHeader({ user }: { user?: { name: string; email: string } | null }) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (

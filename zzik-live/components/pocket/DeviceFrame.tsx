@@ -39,7 +39,9 @@ export function DeviceFrame() {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
+    // Use setTimeout to defer state update and avoid cascading renders
+    const timer = setTimeout(() => setMounted(true), 0);
+    return () => clearTimeout(timer);
   }, []);
 
   return (

@@ -3,12 +3,10 @@
 
 'use client';
 
-import Image from 'next/image';
 import Link from 'next/link';
-import { Button } from '@/components/pocket/Button';
 import { Container } from '@/components/pocket/Container';
 import { motion } from 'framer-motion';
-import { MapPin, Users, TrendingUp } from 'lucide-react';
+import { MapPin, Users } from 'lucide-react';
 
 export function PocketHero() {
   return (

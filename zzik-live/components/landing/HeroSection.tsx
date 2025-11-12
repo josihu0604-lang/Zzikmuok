@@ -8,8 +8,6 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Sparkles, TrendingUp, Users } from 'lucide-react';
 import Link from 'next/link';
-import Image from 'next/image';
-import { cn } from '@/lib/utils';
 
 interface HeroSectionProps {
   activeMissionsCount: number;
@@ -31,7 +29,7 @@ export default function HeroSection({ activeMissionsCount }: HeroSectionProps) {
       setCurrentTextIndex((prev) => (prev + 1) % rotatingTexts.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [rotatingTexts.length]);
 
   // Statistics for social proof and credibility
   const stats = [
