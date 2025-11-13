@@ -12,7 +12,9 @@ import { cn } from '@/lib/utils';
  */
 
 export interface InputProps
-  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'onChange' | 'value'> {
+  extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 
+    'size' | 'onChange' | 'value' | 'onDrag' | 'onDragStart' | 'onDragEnd' | 'onAnimationStart' | 'onAnimationEnd' | 'onAnimationIteration'
+  > {
   /**
    * Input type
    * @default 'text'
