@@ -14,7 +14,7 @@ import { colors, components } from '@/lib/design-tokens';
  * Supports loading states, icons, and full-width layouts
  */
 
-export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface ButtonProps extends Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, 'onDrag' | 'onDragStart' | 'onDragEnd'> {
   /**
    * Button variant style
    * @default 'primary'
