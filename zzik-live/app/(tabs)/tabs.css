@@ -1,0 +1,6 @@
+/* Tabs Layout Styles with iOS 11 fallback */
+
+.tabs-content-wrapper {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 64px);
+  padding-bottom: calc(constant(safe-area-inset-bottom) + 64px); /* iOS 11 fallback */
+}
