@@ -1,8 +1,10 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Heart, MessageCircle, Share2, Bookmark, MapPin } from 'lucide-react';
 import type { FeedItemData } from './VerticalFeed';
+import { track } from '@/lib/analytics/client';
+import { markPostVisible, flushActive } from '@/lib/analytics/flushOnHide';
 
 export function FeedItem({
   item,
@@ -12,7 +14,51 @@ export function FeedItem({
   active: boolean;
 }) {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [isLiked, setIsLiked] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
 
+  // Post view lifecycle tracking
+  useEffect(() => {
+    if (active) {
+      markPostVisible(item.id, item.placeId, 'feed');
+    } else {
+      flushActive();
+    }
+  }, [active, item.id, item.placeId]);
+
+  // Video playback tracking
+  useEffect(() => {
+    if (item.type !== 'video') return;
+
+    const video = videoRef.current;
+    if (!video) return;
+
+    const handlePlay = () => {
+      track('perf_web_vitals', {
+        name: 'video_play',
+        value: video.currentTime,
+        id: `${item.id}-play-${Date.now()}`,
+      });
+    };
+
+    const handlePause = () => {
+      track('perf_web_vitals', {
+        name: 'video_pause',
+        value: video.currentTime,
+        id: `${item.id}-pause-${Date.now()}`,
+      });
+    };
+
+    video.addEventListener('play', handlePlay);
+    video.addEventListener('pause', handlePause);
+
+    return () => {
+      video.removeEventListener('play', handlePlay);
+      video.removeEventListener('pause', handlePause);
+    };
+  }, [item.type, item.id]);
+
+  // Auto-play/pause based on active state
   useEffect(() => {
     if (item.type !== 'video') return;
 
@@ -98,19 +144,49 @@ export function FeedItem({
             icon={Heart}
             label="좋아요"
             count="1.2K"
-            active={false}
+            active={isLiked}
+            onClick={() => {
+              const newState = !isLiked;
+              setIsLiked(newState);
+              track('like_toggle', {
+                target: 'post',
+                id: item.id,
+                active: newState,
+                source: 'feed',
+              });
+            }}
           />
           <ActionButton
             icon={MessageCircle}
             label="댓글"
             count="234"
             active={false}
+            onClick={() => {
+              console.log('Comments not implemented yet');
+            }}
           />
-          <ActionButton icon={Share2} label="공유" active={false} />
+          <ActionButton
+            icon={Share2}
+            label="공유"
+            active={false}
+            onClick={() => {
+              console.log('Share not implemented yet');
+            }}
+          />
           <ActionButton
             icon={Bookmark}
             label="저장"
-            active={false}
+            active={isSaved}
+            onClick={() => {
+              const newState = !isSaved;
+              setIsSaved(newState);
+              track('save_toggle', {
+                target: 'post',
+                id: item.id,
+                active: newState,
+                source: 'feed',
+              });
+            }}
           />
         </div>
       </div>
@@ -123,17 +199,20 @@ function ActionButton({
   label,
   count,
   active,
+  onClick,
 }: {
   icon: any;
   label: string;
   count?: string;
   active: boolean;
+  onClick?: () => void;
 }) {
   return (
     <button
       className="flex flex-col items-center gap-1"
       aria-label={label}
       aria-pressed={active}
+      onClick={onClick}
     >
       <div
         className={`h-12 w-12 rounded-full flex items-center justify-center transition-colors ${

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
-import { init } from '@/lib/analytics/client';
+import { configure, setConsent } from '@/lib/analytics/client';
 import { initFlushOnHide } from '@/lib/analytics/flushOnHide';
 import { initWebVitals } from '@/lib/perf/vitals';
 import { initLongTasks } from '@/lib/perf/longtasks';
@@ -23,8 +23,14 @@ export function AnalyticsProvider({ children }: { children: React.ReactNode }) {
     // Only run on client
     if (typeof window === 'undefined') return;
 
-    // Initialize analytics SDK
-    init();
+    // Configure analytics SDK
+    configure({
+      appVersion: process.env.NEXT_PUBLIC_APP_VERSION || '0.1.0',
+      build: 'web',
+    });
+
+    // Set default consent (can be changed via PrivacyCard)
+    setConsent(true);
 
     // Initialize post view lifecycle manager
     // Ensures post_view_end is always sent even if tab closes

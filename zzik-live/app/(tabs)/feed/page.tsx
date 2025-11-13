@@ -9,7 +9,7 @@ const DEMO_ITEMS: FeedItemData[] = [
   {
     id: '1',
     type: 'image',
-    mediaUrl: '/screenshot-mobile-redesign.png',
+    mediaUrl: 'https://images.unsplash.com/photo-1555217851-5a71b7aa48a1?w=400&h=800&fit=crop',
     author: { name: 'ZZIK User', avatar: undefined },
     caption: '서울의 숨은 명소를 찾아서 📍 #여행 #서울',
     placeId: '1',
@@ -18,7 +18,7 @@ const DEMO_ITEMS: FeedItemData[] = [
   {
     id: '2',
     type: 'image',
-    mediaUrl: '/screenshot-enhanced.png',
+    mediaUrl: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=400&h=800&fit=crop',
     author: { name: 'Travel Seoul', avatar: undefined },
     caption: '이 카페 분위기 정말 좋아요 ☕️',
     placeId: '2',
@@ -27,7 +27,7 @@ const DEMO_ITEMS: FeedItemData[] = [
   {
     id: '3',
     type: 'image',
-    mediaUrl: '/screenshot-map-design.png',
+    mediaUrl: 'https://images.unsplash.com/photo-1519681393784-d120267933ba?w=400&h=800&fit=crop',
     author: { name: 'Explorer', avatar: undefined },
     caption: '야경이 아름다운 곳 🌃',
     placeId: '3',
