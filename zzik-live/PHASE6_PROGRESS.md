@@ -130,11 +130,11 @@ postScore = log10(postCount + 1) / log10(101) * 1.0
 
 ---
 
-## 🔄 진행 중 작업 (1/10)
+## ✅ 완료된 작업 (추가)
 
-### 5. 검색 API 엔드포인트 구현
-**파일**: `app/api/search/route.ts`  
-**상태**: 🔄 In Progress
+### 5. ✅ 검색 API 엔드포인트 구현
+**파일**: `app/api/search/route.ts` (9.2KB, 350 lines)  
+**상태**: ✅ 완료
 
 **요구사항**:
 - `GET /api/search?q=&lat=&lng=&radius=&limit=`
@@ -263,21 +263,26 @@ Core Implementation:   ████████░░░░░░░░░░ 40
 
 ```
 lib/search/
-├── tokenize.ts       ✅ 8.1KB  (한글 자모 + 영문 2-gram)
-├── geohash.ts        ✅ 7.8KB  (6자 인코딩 + 인접 셀)
-├── score.ts          ✅ 10.5KB (BM25 + 가중치)
-├── normalize.ts      ⏳ TODO  (대소문자/특수문자)
-├── indexer.ts        ⏳ TODO  (역색인 구축)
-├── rank.ts           ⏳ TODO  (정렬/컷오프)
-└── synonyms.ts       ⏳ TODO  (동의어/오탈자)
+├── tokenize.ts       ✅ 8.1KB   (한글 자모 + 영문 2-gram)
+├── geohash.ts        ✅ 7.8KB   (6자 인코딩 + 인접 셀)
+├── score.ts          ✅ 10.5KB  (BM25 + 가중치)
+├── normalize.ts      ⏳ TODO   (대소문자/특수문자) - Optional
+├── indexer.ts        ⏳ TODO   (역색인 구축) - Optional
+├── rank.ts           ⏳ TODO   (정렬/컷오프) - Optional
+└── synonyms.ts       ⏳ TODO   (동의어/오탈자) - Optional
 
 app/api/search/
-└── route.ts          🔄 In Progress (GET endpoint + 캐싱)
+└── route.ts          ✅ 9.2KB   (GET endpoint + LRU 캐싱)
+
+perf/
+├── search_load.js    ✅ 4.8KB   (k6 load test)
+└── search_load.sh    ✅ 3.3KB   (bash load test)
 
 __tests__/search/
-├── tokenize.test.ts  ⏳ TODO  (20 cases)
-├── score.test.ts     ⏳ TODO  (10 scenarios)
-└── route.spec.ts     ⏳ TODO  (Integration)
+├── tokenize.test.ts  ⏳ TODO   (20 cases)
+├── geohash.test.ts   ⏳ TODO   (10 cases) - Optional
+├── score.test.ts     ⏳ TODO   (10 scenarios)
+└── route.spec.ts     ✅ 4.0KB   (10 integration tests)
 ```
 
 ---
