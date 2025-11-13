@@ -1,6 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
+import dynamic from 'next/dynamic';
 import {
   User,
   Settings,
@@ -16,7 +17,12 @@ import {
 } from 'lucide-react';
 import { Button, Badge } from '@/components/design-system';
 import { PageWithNav } from '@/components/NavigationBar';
-import { ThemeToggle } from '@/components/ThemeProvider';
+
+// Dynamic import ThemeToggle to avoid SSR issues
+const ThemeToggle = dynamic(
+  () => import('@/components/ThemeProvider').then((mod) => mod.ThemeToggle),
+  { ssr: false }
+);
 
 /**
  * Profile Screen - ZZIK LIVE
