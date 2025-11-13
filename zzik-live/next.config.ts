@@ -67,7 +67,7 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'X-Frame-Options',
-            value: 'SAMEORIGIN',
+            value: 'DENY',
           },
           {
             key: 'X-XSS-Protection',
@@ -75,7 +75,35 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Referrer-Policy',
-            value: 'origin-when-cross-origin',
+            value: 'strict-origin-when-cross-origin',
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: [
+              "default-src 'self'",
+              "base-uri 'none'",
+              "frame-ancestors 'none'",
+              "img-src 'self' data: blob: https:",
+              "media-src 'self' blob: https:",
+              "style-src 'self' 'unsafe-inline'",
+              "script-src 'self' 'wasm-unsafe-eval'",
+              "connect-src 'self' https://*.supabase.co https://api.* https:",
+              "font-src 'self' data:",
+              "object-src 'none'",
+              "form-action 'self'",
+            ].join('; '),
+          },
+          {
+            key: 'Permissions-Policy',
+            value: 'geolocation=(), camera=(), microphone=(), interest-cohort=()',
+          },
+          {
+            key: 'Cross-Origin-Opener-Policy',
+            value: 'same-origin',
+          },
+          {
+            key: 'Cross-Origin-Resource-Policy',
+            value: 'same-origin',
           },
         ],
       },
