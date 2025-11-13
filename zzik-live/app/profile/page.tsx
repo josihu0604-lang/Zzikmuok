@@ -33,9 +33,6 @@ const ThemeToggle = dynamic(
  * - Account management
  */
 
-// Force dynamic rendering (no static generation)
-export const dynamic = 'force-dynamic';
-
 export default function ProfilePage() {
   const user = {
     name: '민지',
