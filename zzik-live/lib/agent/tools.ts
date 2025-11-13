@@ -295,7 +295,7 @@ export async function runTool(block: ToolUseBlock, userId = "demo-user") {
       return {
         success: false,
         error: "입력 값이 올바르지 않습니다.",
-        details: error.errors
+        details: error.issues
       };
     }
 

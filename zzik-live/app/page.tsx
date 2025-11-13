@@ -1,4 +1,4 @@
-// ZZIK LIVE - Root Page (Redirects to Home)
+// ZZIK LIVE - Root Page (Redirects to Explore)
 'use client';
 
 import { useEffect } from 'react';
@@ -8,7 +8,8 @@ export default function RootPage() {
   const router = useRouter();
 
   useEffect(() => {
-    router.push('/home');
+    // 기본 탭은 Explore로 리다이렉트
+    router.push('/explore');
   }, [router]);
 
   return (
