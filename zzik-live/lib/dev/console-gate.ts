@@ -16,6 +16,7 @@ if (process.env.NODE_ENV !== 'production') {
     /Prefetching/,
     /React\.StrictMode double-invoke/,
     /Download the React DevTools/,
+    /Cross origin request detected.*allowedDevOrigins/, // Next.js dev proxy
     
     // Expected development warnings
     /Fast Refresh/,
@@ -23,6 +24,13 @@ if (process.env.NODE_ENV !== 'production') {
     
     // External library development noise (non-critical)
     /ERR_BLOCKED_BY_ORB/, // Browser security feature, image loads successfully
+    
+    // Configuration warnings (expected in certain dev setups)
+    /NEXT_PUBLIC_SUPABASE_URL not configured/,
+    /SUPABASE_SERVICE_ROLE_KEY not configured/,
+    
+    // Console Gate self-activation message
+    /\[Console Gate\] Active/,
   ];
 
   // Store original console methods
