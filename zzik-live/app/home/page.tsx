@@ -128,9 +128,6 @@ export default function HomePage() {
     radius: 2,
   });
   
-  // Pull-to-refresh state
-  const [isRefreshing, setIsRefreshing] = useState(false);
-  
   // Infinite scroll state
   const [displayedMissions, setDisplayedMissions] = useState<typeof mockMissions>([]);
   const [page, setPage] = useState(1);
@@ -183,8 +180,6 @@ export default function HomePage() {
   
   // Pull to refresh handler
   const handleRefresh = useCallback(async () => {
-    setIsRefreshing(true);
-    
     // Simulate API refresh (1 second delay)
     await new Promise((resolve) => setTimeout(resolve, 1000));
     
@@ -193,8 +188,6 @@ export default function HomePage() {
     setDisplayedMissions(refreshedMissions);
     setHasMore(filteredMissions.length > ITEMS_PER_PAGE);
     setPage(1);
-    
-    setIsRefreshing(false);
   }, [filteredMissions]);
   
   // Load more handler for infinite scroll
@@ -223,7 +216,7 @@ export default function HomePage() {
 
   return (
     <PageWithNav badges={{ missions: 3 }}>
-      <PullToRefresh onRefresh={handleRefresh} isRefreshing={isRefreshing}>
+      <PullToRefresh onRefresh={handleRefresh}>
         <div className="min-h-screen bg-gray-50">
         {/* Header */}
       <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
