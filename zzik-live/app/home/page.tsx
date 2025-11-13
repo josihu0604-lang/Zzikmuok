@@ -199,7 +199,7 @@ export default function HomePage() {
   
   // Load more handler for infinite scroll
   const handleLoadMore = useCallback(async () => {
-    if (!hasMore) return;
+    if (!hasMore) return false;
     
     // Simulate API call (500ms delay)
     await new Promise((resolve) => setTimeout(resolve, 500));
@@ -211,12 +211,14 @@ export default function HomePage() {
     
     if (newMissions.length === 0) {
       setHasMore(false);
-      return;
+      return false;
     }
     
     setDisplayedMissions((prev) => [...prev, ...newMissions]);
     setPage(nextPage);
-    setHasMore(endIndex < filteredMissions.length);
+    const hasMoreItems = endIndex < filteredMissions.length;
+    setHasMore(hasMoreItems);
+    return hasMoreItems;
   }, [page, filteredMissions, hasMore]);
 
   return (

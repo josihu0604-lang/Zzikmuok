@@ -18,18 +18,18 @@ import { Loader2 } from 'lucide-react';
 
 interface InfiniteScrollProps<T> {
   /**
-   * Array of items to render
+   * Array of items to render (optional - can be used as trigger only)
    */
-  items: T[];
+  items?: T[];
   /**
-   * Render function for each item
+   * Render function for each item (optional - can be used as trigger only)
    */
-  renderItem: (item: T, index: number) => ReactNode;
+  renderItem?: (item: T, index: number) => ReactNode;
   /**
    * Function to load more items
-   * Should return true if there are more items, false if end reached
+   * Should return true if there are more items, false if end reached (optional return)
    */
-  onLoadMore: () => Promise<boolean>;
+  onLoadMore: () => Promise<boolean | void>;
   /**
    * Loading state from parent
    */
@@ -85,7 +85,9 @@ export function InfiniteScroll<T>({
 
     try {
       const more = await onLoadMore();
-      setInternalHasMore(more);
+      if (more !== undefined) {
+        setInternalHasMore(more);
+      }
     } catch (error) {
       console.error('Failed to load more items:', error);
     } finally {
@@ -132,7 +134,7 @@ export function InfiniteScroll<T>({
   return (
     <div className={className}>
       {/* Items */}
-      {items.map((item, index) => (
+      {items && renderItem && items.map((item, index) => (
         <div key={index}>{renderItem(item, index)}</div>
       ))}
 
