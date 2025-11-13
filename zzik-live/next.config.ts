@@ -10,12 +10,25 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
+    // Suppress warnings for SVG images with fill
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
   },
 
   /* Performance Optimizations */
   compress: true,
   poweredByHeader: false,
   reactStrictMode: true,
+  
+  /* Output Configuration for TTFB Optimization */
+  output: 'standalone', // Optimized standalone build
+  
+  /* Generate ETags for better caching */
+  generateEtags: true,
 
   /* Turbopack Configuration (Next.js 16+) */
   turbopack: {
@@ -28,6 +41,10 @@ const nextConfig: NextConfig = {
     serverActions: {
       bodySizeLimit: '2mb',
     },
+    // Enable optimizeCss for faster TTFB
+    optimizeCss: true,
+    // Enable partial prerendering
+    ppr: false, // Will enable when stable
   },
 
   /* Headers for Security and Performance */

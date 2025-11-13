@@ -1,12 +1,14 @@
 'use client';
 
-import { useState, useMemo, useCallback } from 'react';
+import { useState, useMemo, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin, Bell, Search, ChevronDown, TrendingUp, Navigation as NavigationIcon, X } from 'lucide-react';
 import { MissionCard } from '@/components/design-system';
 import { staggerContainerVariants, staggerItemVariants } from '@/lib/animations';
 import { PageWithNav } from '@/components/NavigationBar';
 import { SearchBar, SearchFilter } from '@/components/SearchBar';
+import { PullToRefresh } from '@/components/PullToRefresh';
+import { InfiniteScroll } from '@/components/InfiniteScroll';
 
 /**
  * Home Screen - ZZIK LIVE
@@ -125,6 +127,15 @@ export default function HomePage() {
     nearbyCount: 12,
     radius: 2,
   });
+  
+  // Pull-to-refresh state
+  const [isRefreshing, setIsRefreshing] = useState(false);
+  
+  // Infinite scroll state
+  const [displayedMissions, setDisplayedMissions] = useState<typeof mockMissions>([]);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const ITEMS_PER_PAGE = 6;
 
   const searchFilters: SearchFilter[] = [
     { id: 'nearby', label: '근처만', value: 'nearby', active: false },
@@ -161,11 +172,58 @@ export default function HomePage() {
 
   // Separate trending missions
   const trendingMissions = mockMissions.filter((m) => m.trending);
+  
+  // Initialize displayed missions
+  useEffect(() => {
+    const initialMissions = filteredMissions.slice(0, ITEMS_PER_PAGE);
+    setDisplayedMissions(initialMissions);
+    setHasMore(filteredMissions.length > ITEMS_PER_PAGE);
+    setPage(1);
+  }, [filteredMissions]);
+  
+  // Pull to refresh handler
+  const handleRefresh = useCallback(async () => {
+    setIsRefreshing(true);
+    
+    // Simulate API refresh (1 second delay)
+    await new Promise((resolve) => setTimeout(resolve, 1000));
+    
+    // Reset to first page
+    const refreshedMissions = filteredMissions.slice(0, ITEMS_PER_PAGE);
+    setDisplayedMissions(refreshedMissions);
+    setHasMore(filteredMissions.length > ITEMS_PER_PAGE);
+    setPage(1);
+    
+    setIsRefreshing(false);
+  }, [filteredMissions]);
+  
+  // Load more handler for infinite scroll
+  const handleLoadMore = useCallback(async () => {
+    if (!hasMore) return;
+    
+    // Simulate API call (500ms delay)
+    await new Promise((resolve) => setTimeout(resolve, 500));
+    
+    const nextPage = page + 1;
+    const startIndex = page * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    const newMissions = filteredMissions.slice(startIndex, endIndex);
+    
+    if (newMissions.length === 0) {
+      setHasMore(false);
+      return;
+    }
+    
+    setDisplayedMissions((prev) => [...prev, ...newMissions]);
+    setPage(nextPage);
+    setHasMore(endIndex < filteredMissions.length);
+  }, [page, filteredMissions, hasMore]);
 
   return (
     <PageWithNav badges={{ missions: 3 }}>
-      <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+      <PullToRefresh onRefresh={handleRefresh} isRefreshing={isRefreshing}>
+        <div className="min-h-screen bg-gray-50">
+        {/* Header */}
       <header className="sticky top-0 z-50 bg-white border-b border-gray-200">
         <div className="flex items-center justify-between px-6 py-4">
           {/* Logo */}
@@ -310,14 +368,14 @@ export default function HomePage() {
             </span>
           </div>
 
-          {/* Vertical List */}
+          {/* Vertical List with Infinite Scroll */}
           <motion.div
             variants={staggerContainerVariants}
             initial="hidden"
             animate="show"
             className="space-y-4 px-6"
           >
-            {filteredMissions.map((mission) => (
+            {displayedMissions.map((mission) => (
               <motion.div key={mission.id} variants={staggerItemVariants}>
                 <MissionCard
                   mission={mission}
@@ -325,10 +383,19 @@ export default function HomePage() {
                 />
               </motion.div>
             ))}
+            
+            {/* Infinite Scroll Trigger */}
+            {displayedMissions.length > 0 && (
+              <InfiniteScroll
+                onLoadMore={handleLoadMore}
+                hasMore={hasMore}
+                threshold={500}
+              />
+            )}
           </motion.div>
 
           {/* Empty State */}
-          {filteredMissions.length === 0 && (
+          {displayedMissions.length === 0 && (
             <div className="text-center py-12 px-6">
               <div className="w-16 h-16 mx-auto mb-4 rounded-full bg-gray-100 flex items-center justify-center">
                 <MapPin className="w-8 h-8 text-gray-400" />
@@ -344,6 +411,7 @@ export default function HomePage() {
         </section>
       </main>
       </div>
+      </PullToRefresh>
     </PageWithNav>
   );
 }
