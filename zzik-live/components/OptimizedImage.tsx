@@ -198,6 +198,7 @@ export interface AvatarProps {
   alt: string;
   size?: 'sm' | 'md' | 'lg' | 'xl';
   fallback?: string;
+  className?: string;
 }
 
 export const Avatar: React.FC<AvatarProps> = ({
@@ -205,6 +206,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   alt,
   size = 'md',
   fallback = '/avatar-default.jpg',
+  className,
 }) => {
   const sizeClasses = {
     sm: 'w-8 h-8',
@@ -214,7 +216,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   };
 
   return (
-    <div className={cn('relative rounded-full overflow-hidden', sizeClasses[size])}>
+    <div className={cn('relative rounded-full overflow-hidden', sizeClasses[size], className)}>
       <OptimizedImage
         src={src || fallback}
         alt={alt}
