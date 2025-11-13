@@ -1,0 +1,10 @@
+{"event_id":"evt_001","name":"app_start","props":{"from_background":false},"ctx":{"did":"dev_sample_001","sid":"sess_001","ts":1710000000000,"app":{"ver":"1.0.0","build":"100"}}}
+{"event_id":"evt_002","name":"post_view_start","props":{"post_id":"pst_001","place_id":"plc_001","from":"feed","index":0},"ctx":{"did":"dev_sample_001","sid":"sess_001","ts":1710000001000,"app":{"ver":"1.0.0","build":"100"}}}
+{"event_id":"evt_003","name":"post_view_end","props":{"post_id":"pst_001","dwell_ms":7421},"ctx":{"did":"dev_sample_001","sid":"sess_001","ts":1710000008421,"app":{"ver":"1.0.0","build":"100"}}}
+{"event_id":"evt_004","name":"like_toggle","props":{"post_id":"pst_001","active":true},"ctx":{"did":"dev_sample_001","sid":"sess_001","ts":1710000009000,"app":{"ver":"1.0.0","build":"100"}}}
+{"event_id":"evt_005","name":"place_sheet_open","props":{"place_id":"plc_001","stage":"half"},"ctx":{"did":"dev_sample_001","sid":"sess_001","ts":1710000010000,"app":{"ver":"1.0.0","build":"100"}}}
+{"event_id":"evt_006","name":"pin_tap","props":{"place_id":"plc_002","from":"map"},"ctx":{"did":"dev_sample_001","sid":"sess_001","ts":1710000015000,"app":{"ver":"1.0.0","build":"100"}}}
+{"event_id":"evt_007","name":"exp_exposure","props":{"exp_key":"feed_caption_lines","variant":"2l"},"ctx":{"did":"dev_sample_001","sid":"sess_001","ts":1710000001000,"app":{"ver":"1.0.0","build":"100"}}}
+{"event_id":"evt_008","name":"page_view","props":{"page":"/feed"},"ctx":{"did":"dev_sample_001","sid":"sess_001","ts":1710000000500,"app":{"ver":"1.0.0","build":"100"}}}
+{"event_id":"evt_009","name":"web_vitals","props":{"metric":"LCP","value":1850,"rating":"good"},"ctx":{"did":"dev_sample_001","sid":"sess_001","ts":1710000002000,"app":{"ver":"1.0.0","build":"100"}}}
+{"event_id":"evt_010","name":"error","props":{"message":"Image load failed","stack":"at Component:42"},"ctx":{"did":"dev_sample_001","sid":"sess_001","ts":1710000005000,"app":{"ver":"1.0.0","build":"100"}}}

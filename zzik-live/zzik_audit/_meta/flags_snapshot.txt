@@ -1,0 +1,29 @@
+=== Feature Flags Snapshot ===
+Date: 2025-11-13
+Environment: Development
+
+# Analytics
+ANALYTICS_ENABLED=true
+ANALYTICS_BATCH_SIZE=50
+ANALYTICS_BATCH_INTERVAL_MS=10000
+ANALYTICS_MAX_BATCH_SIZE_KB=100
+
+# Experiments
+EXPERIMENTS_ENABLED=true
+EXPERIMENT_feed_caption_lines=active
+EXPERIMENT_place_sheet_default_sort=active
+EXPERIMENT_map_pin_size=draft
+
+# Feed Configuration
+FEED_VERTICAL=true
+FEED_ITEM_MIN_HEIGHT=600
+FEED_PRELOAD_THRESHOLD=0.5
+
+# Performance
+IMAGE_OPTIMIZATION=true
+LAZY_LOAD_ENABLED=true
+WEB_VITALS_TRACKING=true
+
+# Development
+DEV_SERVER_PORT=3005
+HOT_RELOAD=true

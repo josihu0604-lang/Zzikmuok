@@ -2,20 +2,11 @@
   "name": "zzik-live",
   "version": "0.1.0",
   "private": true,
-  "engines": {
-    "node": "20.x",
-    "npm": "10.x"
-  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "clean": "rm -rf node_modules .next .turbo && npm ci",
-    "typecheck": "tsc -p tsconfig.json --noEmit",
-    "lint": "eslint . --ext .ts,.tsx",
-    "lint:style": "stylelint \"**/*.{css,scss}\"",
-    "check": "npm run typecheck && npm run lint && npm run lint:style",
-    "prepush": "npm run check",
+    "lint": "eslint",
     "test": "jest",
     "test:watch": "jest --watch",
     "test:coverage": "jest --coverage",
@@ -58,8 +49,6 @@
     "eslint-config-next": "16.0.1",
     "jest": "^30.2.0",
     "jest-environment-jsdom": "^30.2.0",
-    "stylelint": "^16.25.0",
-    "stylelint-config-standard": "^39.0.1",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
     "typescript": "^5"

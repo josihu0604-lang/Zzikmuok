@@ -10,19 +10,11 @@ const nextConfig: NextConfig = {
     dangerouslyAllowSVG: true,
     contentDispositionType: 'attachment',
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-    // DEV/HYGIENE: Explicit whitelist (no wildcard warnings)
+    // Suppress warnings for SVG images with fill
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'images.unsplash.com',
-      },
-      {
-        protocol: 'https',
-        hostname: 'cdn.jsdelivr.net',
-      },
-      {
-        protocol: 'https',
-        hostname: '*.supabase.co',
+        hostname: '**',
       },
     ],
   },
@@ -57,39 +49,6 @@ const nextConfig: NextConfig = {
 
   /* Headers for Security and Performance */
   async headers() {
-    const isDev = process.env.NODE_ENV === 'development';
-    
-    // CSP configuration: strict for production, relaxed for development
-    const cspDirectives = isDev
-      ? [
-          "default-src 'self'",
-          "base-uri 'self'",
-          "frame-ancestors 'none'",
-          "img-src 'self' data: blob: https:",
-          "media-src 'self' blob: https:",
-          "style-src 'self' 'unsafe-inline'",
-          // Development: allow unsafe-eval and unsafe-inline for HMR and Next.js dev scripts
-          "script-src 'self' 'unsafe-eval' 'unsafe-inline'",
-          "connect-src 'self' https://*.supabase.co https: ws: wss:",
-          "font-src 'self' data:",
-          "object-src 'none'",
-          "form-action 'self'",
-        ]
-      : [
-          "default-src 'self'",
-          "base-uri 'none'",
-          "frame-ancestors 'none'",
-          "img-src 'self' data: blob: https:",
-          "media-src 'self' blob: https:",
-          "style-src 'self' 'unsafe-inline'",
-          // Production: strict policy with only necessary unsafe-eval for WASM
-          "script-src 'self' 'wasm-unsafe-eval'",
-          "connect-src 'self' https://*.supabase.co https:",
-          "font-src 'self' data:",
-          "object-src 'none'",
-          "form-action 'self'",
-        ];
-    
     return [
       {
         source: '/:path*',
@@ -120,7 +79,19 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Content-Security-Policy',
-            value: cspDirectives.join('; '),
+            value: [
+              "default-src 'self'",
+              "base-uri 'none'",
+              "frame-ancestors 'none'",
+              "img-src 'self' data: blob: https:",
+              "media-src 'self' blob: https:",
+              "style-src 'self' 'unsafe-inline'",
+              "script-src 'self' 'wasm-unsafe-eval'",
+              "connect-src 'self' https://*.supabase.co https://api.* https:",
+              "font-src 'self' data:",
+              "object-src 'none'",
+              "form-action 'self'",
+            ].join('; '),
           },
           {
             key: 'Permissions-Policy',
