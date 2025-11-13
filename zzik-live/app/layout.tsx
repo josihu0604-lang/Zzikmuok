@@ -6,6 +6,7 @@ import { WebVitalsProvider } from "@/components/WebVitalsProvider";
 import { ToastProvider } from "@/components/Toast";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { ThemeProvider } from "@/components/ThemeProvider";
+import { AnalyticsProvider } from "@/components/AnalyticsProvider";
 
 // Load Inter font (fallback for Pretendard which is loaded via CSS)
 const inter = Inter({
@@ -98,12 +99,14 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} font-sans antialiased`}>
-        <WebVitalsProvider />
-        <ErrorBoundary>
-          <ToastProvider>
-            <ServiceWorkerProvider>{children}</ServiceWorkerProvider>
-          </ToastProvider>
-        </ErrorBoundary>
+        <AnalyticsProvider>
+          <WebVitalsProvider />
+          <ErrorBoundary>
+            <ToastProvider>
+              <ServiceWorkerProvider>{children}</ServiceWorkerProvider>
+            </ToastProvider>
+          </ErrorBoundary>
+        </AnalyticsProvider>
       </body>
     </html>
   );

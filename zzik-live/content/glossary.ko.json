@@ -1,0 +1,64 @@
+{
+  "brand": {
+    "app_name": "ZZIK",
+    "tagline": "순간을 찍다, 장소를 기록하다"
+  },
+  "places": {
+    "Brooklyn Bridge Park": "브루클린 브리지 파크",
+    "Gyeongbokgung Palace": "경복궁",
+    "N Seoul Tower": "N서울타워",
+    "Seongsu-dong": "성수동",
+    "Hongdae": "홍대"
+  },
+  "actions": {
+    "bookmark": "저장",
+    "like": "좋아요",
+    "share": "공유",
+    "comment": "댓글",
+    "view": "조회",
+    "visit": "방문",
+    "follow": "팔로우",
+    "unfollow": "언팔로우",
+    "report": "신고",
+    "block": "차단"
+  },
+  "categories": {
+    "restaurant": "음식점",
+    "cafe": "카페",
+    "attraction": "관광지",
+    "park": "공원",
+    "museum": "박물관",
+    "shopping": "쇼핑",
+    "hotel": "숙박",
+    "nightlife": "나이트라이프"
+  },
+  "status": {
+    "loading": "로딩 중",
+    "error": "오류",
+    "empty": "비어 있음",
+    "offline": "오프라인",
+    "online": "온라인",
+    "new": "신규",
+    "updated": "업데이트됨"
+  },
+  "time": {
+    "just_now": "방금",
+    "minutes_ago": "분 전",
+    "hours_ago": "시간 전",
+    "days_ago": "일 전",
+    "months_ago": "개월 전",
+    "years_ago": "년 전"
+  },
+  "distance": {
+    "meters": "m",
+    "kilometers": "km",
+    "walking_time": "도보 {minutes}분"
+  },
+  "errors": {
+    "network": "인터넷 연결 없음",
+    "server": "서버 오류",
+    "not_found": "페이지를 찾을 수 없습니다",
+    "unauthorized": "권한이 없습니다",
+    "generic": "문제가 발생했습니다"
+  }
+}

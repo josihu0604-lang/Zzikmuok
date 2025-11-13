@@ -1,6 +1,7 @@
 import { defineConfig, globalIgnores } from "eslint/config";
 import nextVitals from "eslint-config-next/core-web-vitals";
 import nextTs from "eslint-config-next/typescript";
+import zzikAnalytics from "./.eslint/index.js";
 
 const eslintConfig = defineConfig([
   ...nextVitals,
@@ -13,6 +14,15 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  // ZZIK Analytics custom rules
+  {
+    plugins: {
+      "zzik": zzikAnalytics,
+    },
+    rules: {
+      "zzik/no-pii-in-analytics": "error",
+    },
+  },
 ]);
 
 export default eslintConfig;
