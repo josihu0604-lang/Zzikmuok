@@ -1,12 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getSupabaseServer, isSupabaseConfigured } from '@/lib/supabase';
+import { normalizeEventName, isAlias } from '@/lib/analytics/aliasing';
 
 /**
  * Analytics Collection API
  * 
  * Accepts batch event submissions from client SDK
  * Stores in Supabase (falls back to mock if not configured)
+ * 
+ * Features:
+ * - Event name aliasing (backward compatibility)
+ * - PII filtering (defense in depth)
+ * - Event deduplication (event_id unique constraint)
+ * - Server timestamp authority (ts_server)
  */
 
 const Context = z.object({
@@ -59,9 +66,18 @@ export async function POST(req: NextRequest) {
       const forbiddenKeys = ['lat', 'lng', 'latitude', 'longitude', 'email', 'phone', 'address', 'password'];
       forbiddenKeys.forEach(key => delete sanitizedProps[key]);
 
+      // Apply event name aliasing (backward compatibility)
+      const originalName = e.name;
+      const canonicalName = normalizeEventName(originalName);
+      
+      // Preserve original name if aliased (for migration tracking)
+      if (isAlias(originalName)) {
+        sanitizedProps.original_name = originalName;
+      }
+
       return {
         event_id: e.event_id ?? crypto.randomUUID(),
-        name: String(e.name).slice(0, 64), // Limit name length
+        name: String(canonicalName).slice(0, 64), // Use canonical name
         user_id: e.context.user_id ?? null,
         session_id: e.context.session_id,
         device_id: e.context.device_id,
