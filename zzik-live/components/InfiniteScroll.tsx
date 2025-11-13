@@ -151,14 +151,14 @@ export function InfiniteScroll<T>({
       )}
 
       {/* End of List */}
-      {!internalHasMore && !showLoading && items.length > 0 && (
+      {!internalHasMore && !showLoading && (items?.length ?? 0) > 0 && (
         <div className="py-8">
           {endComponent || <DefaultEndComponent />}
         </div>
       )}
 
       {/* Empty State */}
-      {items.length === 0 && !showLoading && (
+      {(items?.length ?? 0) === 0 && !showLoading && (
         <EmptyComponent />
       )}
 
