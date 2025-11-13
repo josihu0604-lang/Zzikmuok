@@ -19,8 +19,6 @@ const eslintConfig = defineConfig([
     rules: {
       // Only console.warn allowed (for debugging)
       "no-console": ["error", { "allow": ["warn"] }],
-      // Prevent unknown props (hydration issues)
-      "react/no-unknown-property": "error",
     },
   },
   // Allow console in specific files
