@@ -7,8 +7,6 @@ import { ToastProvider } from "@/components/Toast";
 import { ErrorBoundary } from "@/components/ErrorBoundary";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { AnalyticsProvider } from "@/components/AnalyticsProvider";
-// DEV/HYGIENE: Console gate activation (dev only)
-import "@/lib/dev/console-gate";
 
 // Load Inter font (fallback for Pretendard which is loaded via CSS)
 const inter = Inter({

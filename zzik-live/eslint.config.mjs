@@ -14,6 +14,20 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
   ]),
+  // DEV/HYGIENE: Console usage rules
+  {
+    rules: {
+      // Only console.warn allowed (for debugging)
+      "no-console": ["error", { "allow": ["warn"] }],
+    },
+  },
+  // Allow console in specific files
+  {
+    files: ["**/lib/log/*.ts", "**/lib/dev/*.ts", "**/app/api/**/*.ts"],
+    rules: {
+      "no-console": "off",
+    },
+  },
   // ZZIK Analytics custom rules
   {
     plugins: {
